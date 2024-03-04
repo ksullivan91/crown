@@ -11,23 +11,14 @@ import {
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-//   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-//   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-//   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-//   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-//   appId: process.env.REACT_APP_FIREBASE_APP_ID
-// };
-
 const firebaseConfig = {
-  apiKey: "AIzaSyBfAdm7VUOTSpjRhQV8fEOHWkIofKKHnrc",
-  authDomain: "crown-db-76c57.firebaseapp.com",
-  projectId: "crown-db-76c57",
-  storageBucket: "crown-db-76c57.appspot.com",
-  messagingSenderId: "153710639319",
-  appId: "1:153710639319:web:caff08ffce627467eb9892",
-  measurementId: "G-D8LD70S0D4",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID, // Add this if you're using Google Analytics
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
