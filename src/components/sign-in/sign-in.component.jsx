@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, TextInput, Typography } from "base-ui-react";
-import { signInWithEmailAndPasswordAuth } from "../../utils/firebase/firebase.utils";
-import useGoogleSignIn from "../../hooks/useGoogleSignIn";
+import { signInWithEmailAndPasswordAuth, signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
 import getAuthErrorMessage from "../../utils/firebase/authErrorHandling";
 
 import "./sign-in.styles.scss";
@@ -9,7 +8,6 @@ import "./sign-in.styles.scss";
 const SignInForm = () => {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-  const { logGoogleUser, googleError } = useGoogleSignIn();
   const { email, password } = formValues;
 
   const handleChange = (event) => {
@@ -19,21 +17,26 @@ const SignInForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(""); // Clear any existing error
+    setError("");
     try {
-      await signInWithEmailAndPasswordAuth(email, password);
+      const response = await signInWithEmailAndPasswordAuth(email, password);
+      if (response.user) {
+      }
     } catch (error) {
       setError(getAuthErrorMessage(error));
       console.error("Error signing in:", error);
     }
   };
 
-  // Listen for changes in the Google sign-in error and set it if present
-  useEffect(() => {
-    if (googleError) {
-      setError(googleError);
+  const logGoogleUser = async () => {
+    try {
+      await signInWithGooglePopup();
+    } catch (e) {
+      const errorMessage = getAuthErrorMessage(e);
+      setError(errorMessage);
+      console.error("Error signing in", e);
     }
-  }, [googleError]);
+  };
 
   return (
     <div className="sign-in-form">

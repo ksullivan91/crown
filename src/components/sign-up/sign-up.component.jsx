@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Button, TextInput, Typography } from 'base-ui-react';
+import React, { useState, useEffect, useContext } from "react";
+import { Button, TextInput, Typography } from "base-ui-react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserProfileDocumentFromAuth,
-} from '../../utils/firebase/firebase.utils';
-import useGoogleSignIn from '../../hooks/useGoogleSignIn';
-import getAuthErrorMessage from '../../utils/firebase/authErrorHandling';
+  signInWithGooglePopup,
+} from "../../utils/firebase/firebase.utils";
+import getAuthErrorMessage from "../../utils/firebase/authErrorHandling";
 
-import './sign-up.styles.scss';
+import "./sign-up.styles.scss";
 
 const SignUpForm = () => {
   const initialFormFields = {
-    displayName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    displayName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   };
 
   const [formValues, setFormValues] = useState(initialFormFields);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const { displayName, email, password, confirmPassword } = formValues;
-  const { logGoogleUser, googleError } = useGoogleSignIn();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -33,34 +32,45 @@ const SignUpForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError('');
+    setError("");
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(email, password);
-      await createUserProfileDocumentFromAuth(user, { displayName });
+      const { user } = await createAuthUserWithEmailAndPassword(
+        email,
+        password,
+      );
+      const userRef = await createUserProfileDocumentFromAuth(user, {
+        displayName,
+      });
+      console.log(userRef);
       resetFormFields();
-    } catch (error) {
-      setError(getAuthErrorMessage(error)); // Use utility function for error handling
-      console.error('Error creating account:', error);
+    } catch (e) {
+      setError(getAuthErrorMessage(e)); // Use utility function for error handling
+      console.error("Error creating account:", e);
     }
   };
 
-  // Update error state based on googleError changes
-  useEffect(() => {
-    if (googleError) {
-      setError(googleError);
+  const logGoogleUser = async () => {
+    try {
+      await signInWithGooglePopup();
+    } catch (e) {
+      const errorMessage = getAuthErrorMessage(e);
+      setError(errorMessage);
+      console.error("Error signing in", e);
     }
-  }, [googleError]);
+  };
 
   return (
     <div className="sign-up-form">
       <Typography variant="h3">Don't have an account?</Typography>
-      <Typography variant="label">Sign Up with your email and password</Typography>
+      <Typography variant="label">
+        Sign Up with your email and password
+      </Typography>
       {error && <Typography color="error">{error}</Typography>}
       <form onSubmit={handleSubmit}>
         <TextInput
@@ -95,9 +105,14 @@ const SignUpForm = () => {
           type="password"
           required
         />
-        <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div
+          className="buttons"
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
           <Button type="submit">Sign Up</Button>
-          <Button onClick={logGoogleUser} variant="secondary">Sign Up with Google</Button>
+          <Button onClick={logGoogleUser} variant="secondary">
+            Sign Up with Google
+          </Button>
         </div>
       </form>
     </div>

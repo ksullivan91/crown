@@ -6,6 +6,8 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -50,27 +52,26 @@ export const createUserProfileDocumentFromAuth = async (
 ) => {
   if (!userAuth) return;
 
-  const userDocRef = doc(db, "users", userAuth.uid);
-
-  const userSnapshot = await getDoc(userDocRef);
+  const userRef = doc(db, "users", userAuth.uid);
+  // Use getDoc to retrieve the document snapshot
+  const userSnapshot = await getDoc(userRef);
 
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
-
     try {
-      await setDoc(userDocRef, {
+      await setDoc(userRef, {
         displayName,
         email,
         createdAt,
         ...additionalInformation,
       });
     } catch (error) {
-      console.log("error creating the user", error.message);
+      console.error("error creating the user", error.message);
     }
   }
 
-  return userDocRef;
+  return userRef; // This correctly returns the document reference
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -83,4 +84,16 @@ export const signInWithEmailAndPasswordAuth = async (email, password) => {
   if (!email || !password) return;
 
   return await signInWithEmailAndPassword(auth, email, password);
+};
+
+export const signOutUser = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Error signing out", error);
+  }
+};
+
+export const onAuthStateChangedListener = (callback) => {
+  return onAuthStateChanged(auth, callback);
 };

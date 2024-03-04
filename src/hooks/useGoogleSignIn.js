@@ -1,5 +1,5 @@
-// hooks/useGoogleSignIn.js
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { onSnapshot } from "firebase/firestore";
 import {
   signInWithGooglePopup,
   createUserProfileDocumentFromAuth,
@@ -7,21 +7,16 @@ import {
 import getAuthErrorMessage from "../utils/firebase/authErrorHandling";
 
 const useGoogleSignIn = () => {
-  const [error, setError] = useState("");
-
   const logGoogleUser = async () => {
     try {
-      const { user } = await signInWithGooglePopup();
-      await createUserProfileDocumentFromAuth(user);
-      setError("");
+      await signInWithGooglePopup();
+
     } catch (error) {
-      const errorMessage = getAuthErrorMessage(error);
-      setError(errorMessage);
-      console.error("Error signing in", error);
+      return getAuthErrorMessage(error);
     }
   };
 
-  return { logGoogleUser, error };
+  return { logGoogleUser };
 };
 
 export default useGoogleSignIn;
