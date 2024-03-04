@@ -25,7 +25,6 @@ const Navigation = () => {
           {currentUser ? (
             <Link
               className="nav-link"
-              to="/logout"
               onClick={signOutHandler}
             >
               SIGN OUT
