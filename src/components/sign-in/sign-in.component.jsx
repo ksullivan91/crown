@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, TextInput, Typography } from "base-ui-react";
-import { signInWithEmailAndPasswordAuth, signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
+import {
+  signInWithEmailAndPasswordAuth,
+  signInWithGooglePopup,
+} from "../../utils/firebase/firebase.utils";
 import getAuthErrorMessage from "../../utils/firebase/authErrorHandling";
 
 import "./sign-in.styles.scss";

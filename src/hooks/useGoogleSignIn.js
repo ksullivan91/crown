@@ -10,7 +10,6 @@ const useGoogleSignIn = () => {
   const logGoogleUser = async () => {
     try {
       await signInWithGooglePopup();
-
     } catch (error) {
       return getAuthErrorMessage(error);
     }
