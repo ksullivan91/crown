@@ -1,0 +1,26 @@
+.category-preview-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+
+  h3 {
+    margin-bottom: 16px;
+  }
+  .title {
+    cursor: pointer;
+    text-decoration: none;
+    color: #252525;
+    transition: all 0.25s ease-in-out;
+    border-bottom: 4px solid transparent;
+    &:hover {
+      color: #e85b81;
+      border-bottom: 4px solid #e85b81;
+    }
+  }
+
+  .preview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 20px;
+  }
+}

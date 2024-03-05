@@ -21,9 +21,7 @@ const CartDropdown = () => {
         ))}
       </div>
       <div className="total">
-        <Typography variant="h5">
-          TOTAL: {formatCurrency(cartTotal)}
-        </Typography>
+        <Typography variant="h5">TOTAL: {formatCurrency(cartTotal)}</Typography>
       </div>
       <Button onClick={goToCheckoutHandler}>GO TO CHECKOUT</Button>
     </div>

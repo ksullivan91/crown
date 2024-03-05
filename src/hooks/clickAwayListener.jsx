@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
 const ClickAwayListener = ({ children, onClickAway, isOpen }) => {
   const ref = useRef(null);
@@ -11,9 +11,9 @@ const ClickAwayListener = ({ children, onClickAway, isOpen }) => {
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener('click', handleClickOutside, true);
+      document.addEventListener("click", handleClickOutside, true);
       return () => {
-        document.removeEventListener('click', handleClickOutside, true);
+        document.removeEventListener("click", handleClickOutside, true);
       };
     }
   }, [isOpen, handleClickOutside]);

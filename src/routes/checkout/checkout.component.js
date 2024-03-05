@@ -33,9 +33,7 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <div className="total">
-        <Typography variant="h3">
-          TOTAL: {formatCurrency(cartTotal)}
-        </Typography>
+        <Typography variant="h3">TOTAL: {formatCurrency(cartTotal)}</Typography>
       </div>
     </div>
   );
