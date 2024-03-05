@@ -12,7 +12,7 @@ const Cart = () => {
   };
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <div onClick={toggleCartHandler}>
         <CartIcon count={cartCount} />
       </div>
