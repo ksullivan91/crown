@@ -18,9 +18,14 @@
     height: 240px;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   button {
     margin-top: auto;
+  }
+  .total {
+    margin-top: 24px;
+    text-align: center;
   }
 }

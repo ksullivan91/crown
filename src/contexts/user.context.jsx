@@ -3,6 +3,7 @@ import {
   createUserProfileDocumentFromAuth,
   onAuthStateChangedListener,
 } from "../utils/firebase/firebase.utils";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export const UserContext = createContext({
   currentUser: null,
@@ -10,7 +11,7 @@ export const UserContext = createContext({
 });
 
 export const UserProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useLocalStorage("currentUser", null);
   const value = { currentUser, setCurrentUser };
 
   useEffect(() => {

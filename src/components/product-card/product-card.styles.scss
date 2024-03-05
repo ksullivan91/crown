@@ -16,7 +16,7 @@
 
   button {
     width: 80%;
-    opacity: 0.7;
+
     position: absolute;
     top: 255px;
     display: none;
@@ -24,11 +24,11 @@
 
   &:hover {
     img {
-      opacity: 0.8;
+      transition: all 1s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+      opacity: 0.5;
     }
 
     button {
-      opacity: 0.85;
       display: flex;
     }
   }

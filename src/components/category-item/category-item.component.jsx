@@ -1,3 +1,4 @@
+import { Typography } from "base-ui-react";
 import "./category-item.styles.scss";
 
 const CategoryItem = ({ category }) => {
@@ -11,8 +12,8 @@ const CategoryItem = ({ category }) => {
         }}
       />
       <div className="category-body-container">
-        <h2>{title}</h2>
-        <p>Shop Now</p>
+        <Typography variant="h5">{title}</Typography>
+        <Typography variant="small">SHOP NOW</Typography>
       </div>
     </div>
   );
