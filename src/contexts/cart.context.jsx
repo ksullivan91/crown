@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { useAlert } from "./alert.context";
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(
@@ -51,6 +52,7 @@ export const CartContext = createContext({
 });
 
 export const CartProvider = ({ children }) => {
+  const { showAlert } = useAlert();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useLocalStorage("cartItems", []); // Use useLocalStorage hook here
   const [cartCount, setCartCount] = useState(0);
@@ -74,18 +76,34 @@ export const CartProvider = ({ children }) => {
 
   const addItemToCart = (productToAdd) => {
     setCartItems(addCartItem(cartItems, productToAdd));
+    showAlert({
+      status: "success",
+      message: `${productToAdd.name} has been been added to your cart!`,
+    });
   };
 
   const removeItemFromCart = (cartItemToRemove) => {
     setCartItems(removeCartItem(cartItems, cartItemToRemove));
+    showAlert({
+      status: "notification",
+      message: `${cartItemToRemove.name} has been removed from your cart!`,
+    });
   };
 
   const removeItemToCart = (cartItemToRemove) => {
     setCartItems(removeCartItem(cartItems, cartItemToRemove));
+    showAlert({
+      status: "notification",
+      message: `${cartItemToRemove.name} has been removed from your cart!`,
+    });
   };
 
   const clearItemFromCart = (cartItemToClear) => {
     setCartItems(clearCartItem(cartItems, cartItemToClear));
+    showAlert({
+      status: "notification",
+      message: `${cartItemToClear.name} has been removed from your cart!`,
+    });
   };
 
   const value = {

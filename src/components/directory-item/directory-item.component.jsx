@@ -6,18 +6,21 @@ import "./directory-item.styles.scss";
 const CategoryItem = ({ category }) => {
   const { imageUrl, title } = category;
   return (
-    <Link to={`/shop/${title.toLowerCase()}`} className="directory-item-container">
+    <Link
+      to={`/shop/${title.toLowerCase()}`}
+      className="directory-item-container"
+    >
       <div
         className="background-image"
         style={{
           backgroundImage: `url(${imageUrl})`,
         }}
       />
-        <div className="directory-item-body-container">
-          <Typography variant="h5">{title}</Typography>
-          <Typography variant="small">SHOP NOW</Typography>
-        </div>
-      </Link>
+      <div className="directory-item-body-container">
+        <Typography variant="h5">{title}</Typography>
+        <Typography variant="small">SHOP NOW</Typography>
+      </div>
+    </Link>
   );
 };
 

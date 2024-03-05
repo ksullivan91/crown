@@ -1,11 +1,13 @@
 .category {
+  max-width: 1024px;
+  margin: 0 auto;
   .category-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    column-gap: 20px;
+    column-gap: 32px;
     row-gap: 50px;
   }
   h3 {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 }

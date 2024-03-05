@@ -25,9 +25,20 @@
     justify-content: center;
     label {
       color: white !important;
+      position: relative;
+      right: -1px;
     }
   }
   svg {
     cursor: pointer;
+  }
+  &:hover {
+    .item-count {
+      transform: scale(1.025);
+      transition: all 0.15s ease-in-out;
+      label {
+        transition: all 0s ease-in-out;
+      }
+    }
   }
 }
