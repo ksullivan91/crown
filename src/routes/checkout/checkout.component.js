@@ -6,6 +6,7 @@ import CheckoutItem from "../../components/checkout-teim/checkout-item.component
 import formatCurrency from "../../utils/formatCurrencyToUs";
 
 import "./checkout.styles.scss";
+import PaymentForm from "../../components/payment-form/payment-form.component";
 
 const Checkout = () => {
   const { cartItems, cartTotal } = useContext(CartContext);
@@ -35,6 +36,7 @@ const Checkout = () => {
       <div className="total">
         <Typography variant="h3">TOTAL: {formatCurrency(cartTotal)}</Typography>
       </div>
+      <PaymentForm />
     </div>
   );
 };

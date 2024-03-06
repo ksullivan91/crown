@@ -1,0 +1,6 @@
+@mixin for-desktop {
+  @media (min-width: 1024px) {
+    // Targets screens 1024px and wider
+    @content; // This will inject the content passed into the mixin
+  }
+}

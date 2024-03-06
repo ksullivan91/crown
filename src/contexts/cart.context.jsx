@@ -106,6 +106,10 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const clearAllItemsFromCart = () => {
+    setCartItems([]);
+  };
+
   const value = {
     isCartOpen,
     setIsCartOpen,
@@ -113,6 +117,7 @@ export const CartProvider = ({ children }) => {
     removeItemFromCart,
     removeItemToCart,
     clearItemFromCart,
+    clearAllItemsFromCart,
     cartItems,
     cartCount,
     cartTotal,
